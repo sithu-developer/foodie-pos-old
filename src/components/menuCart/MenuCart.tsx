@@ -9,7 +9,7 @@ interface Props {
 const MenuCart = ({menu} : Props) => {
 
     return (
-    <Link href={String(menu.id)} style={{textDecoration : "none", width : "200px"}}>
+    <Link href={`menu/${String(menu.id)}`} style={{textDecoration : "none", width : "200px"}}>
         <Card sx={{ maxWidth: "300px" ,margin :"10px"}}>
             <CardMedia
               component="img"

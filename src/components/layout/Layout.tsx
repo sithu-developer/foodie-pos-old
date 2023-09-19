@@ -25,7 +25,7 @@ const BackofficeLayout =  ({children} : Prop) => {
                         <ListItemText primary={<Typography sx={{fontSize: "16px" , color: "#1B6B93"}}>Menu</Typography>} />
                     </ListItemButton>
                 </Link>
-                <Link href={"/backoffice/menuCategory"} style={{textDecoration: "none"}}>
+                <Link href={"/backoffice/menu-category"} style={{textDecoration: "none"}}>
                     <ListItemButton>
                         <ListItemIcon>
                           <CategoryIcon sx={{fontSize: "16px", color: "#1B6B93"}} />
