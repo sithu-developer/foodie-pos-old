@@ -30,4 +30,4 @@ const ItemCard = ({menuCategory }: Prop) => {
     )
 }
 
-export default ItemCard;
+export default ItemCard ;

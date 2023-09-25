@@ -8,3 +8,9 @@ export interface MenuType extends CreateMenuPayLoad {
     id: number
     isArchived : boolean
 }
+
+export interface MenuState {
+    items : MenuType[]
+    isLoading : boolean
+    error : Error | null
+}

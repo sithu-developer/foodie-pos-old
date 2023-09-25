@@ -1,4 +1,6 @@
 import config from "@/config";
+import { useAppDispatch } from "@/store/hook";
+import { setMenus } from "@/store/slices/menuSlice";
 import { CreateMenuPayLoad, MenuType } from "@/types/menu";
 import { Box, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
@@ -6,13 +8,13 @@ import { useState } from "react";
 interface Props {
     openProp : boolean
     setOpen : (value : boolean ) => void;
-    setMenus : (value : MenuType[]) => void;
 }
 
 const defaultNewMenu = {name: "", price : 0};
 
-const CreateMenu = ({openProp,setOpen, setMenus} : Props) => {
-    const [createdMenu, setNewMenu ] = useState<CreateMenuPayLoad>(defaultNewMenu)
+const CreateMenu = ({openProp,setOpen} : Props) => {
+    const [createdMenu, setNewMenu ] = useState<CreateMenuPayLoad>(defaultNewMenu);
+    const dispatch = useAppDispatch();
 
     const createMenu = async() => {
        const response = await fetch(`${config.apiBaseUrl}/menu`,{
@@ -23,7 +25,8 @@ const CreateMenu = ({openProp,setOpen, setMenus} : Props) => {
             body: JSON.stringify(createdMenu)
         })
        const menus = await response.json();
-       setMenus(menus);
+     //  setMenus(menus);
+        dispatch(setMenus(menus));
        setNewMenu(defaultNewMenu)
     };
 

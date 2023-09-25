@@ -1,4 +1,6 @@
 import config from "@/config";
+import { useAppDispatch } from "@/store/hook";
+import { setMenuCategories } from "@/store/slices/menuCategorySlice";
 import { CreateMenuCategoryPayLoad, MenuCategoryType } from "@/types/menuCategory";
 import { Dialog, DialogTitle, DialogContent, Box, TextField, Button, Switch, FormControlLabel } from "@mui/material";
 import { useState } from "react";
@@ -7,13 +9,13 @@ import { useState } from "react";
 interface Props {   
     openProp : boolean
     setOpen : (value : boolean ) => void;
-    setMenuCategories : (value : MenuCategoryType[]) => void;
 }
 
 const defaultNewMenuCategory = {name: "", isAvaliable : true};
 
-const CreateMenuCategory = ({openProp,setOpen, setMenuCategories} : Props) => {
+const CreateMenuCategory = ({openProp,setOpen } : Props) => {
     const [createdMenuCategory, setNewMenuCategory ] = useState<CreateMenuCategoryPayLoad>(defaultNewMenuCategory)
+    const dispatch = useAppDispatch();
 
     const createMenuCategory = async() => {
        const response = await fetch(`${config.apiBaseUrl}/menu-category`,{
@@ -24,8 +26,8 @@ const CreateMenuCategory = ({openProp,setOpen, setMenuCategories} : Props) => {
             body: JSON.stringify(createdMenuCategory)
         })
        const menuCategories = await response.json();
-       console.log(menuCategories)
-       setMenuCategories(menuCategories);
+      // setMenuCategories(menuCategories);
+        dispatch(setMenuCategories(menuCategories))
        setNewMenuCategory(defaultNewMenuCategory)
     };
 
