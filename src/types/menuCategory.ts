@@ -11,3 +11,8 @@ export interface MenuCategoryState {
     isLoading : boolean
     error : Error | null
 }
+
+export interface UpdateMenuCategory {
+    id : number
+    name : string
+}

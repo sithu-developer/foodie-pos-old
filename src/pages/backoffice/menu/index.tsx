@@ -15,15 +15,8 @@ const MenuPage = () => {
     const [open, setOpen ] = useState<boolean>(false);
 
     useEffect(() => {
-         fetchMenu();
+        // fetchMenu();
      }, []);
-
-    const fetchMenu = async() => {
-        const response = await fetch(`${config.apiBaseUrl}/menu`);
-        const currentMenus = await response.json();
-        //setMenus(currentMenus); 
-        dispatch(setMenus(currentMenus))
-    }
 
     return (
         <BackofficeLayout>

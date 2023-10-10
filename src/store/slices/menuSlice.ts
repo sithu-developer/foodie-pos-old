@@ -1,5 +1,6 @@
-import { MenuState } from "@/types/menu";
-import {createSlice} from "@reduxjs/toolkit";
+import config from "@/config";
+import { CreateMenuPayLoad, MenuState, UpdateMenu } from "@/types/menu";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 const initialState : MenuState = {
     items : [],
@@ -7,8 +8,25 @@ const initialState : MenuState = {
     error : null
 }
 
+export const updateMenu = createAsyncThunk("menuSlice/updateMenu", async(payload : UpdateMenu, thunkApi) => {
+    console.log(payload);
+})
+
+
+export const handleCreateMenu = createAsyncThunk("menuSlice/createMenu1", async(payload : CreateMenuPayLoad , thunkApi) => {
+    const response = await fetch(`${config.apiBaseUrl}/menu`,{
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    }) 
+    const menus = await response.json();
+    thunkApi.dispatch(setMenus(menus));
+})
+
 const menuSlice = createSlice({
-    name: "menu",
+    name: "menuSlice",
     initialState : initialState,
     reducers : {
         setMenus : (state, action) => {

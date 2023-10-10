@@ -14,3 +14,8 @@ export interface MenuState {
     isLoading : boolean
     error : Error | null
 }
+
+export interface UpdateMenu {
+    id : number
+    name : string
+}

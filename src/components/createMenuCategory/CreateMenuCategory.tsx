@@ -1,6 +1,6 @@
 import config from "@/config";
 import { useAppDispatch } from "@/store/hook";
-import { setMenuCategories } from "@/store/slices/menuCategorySlice";
+import { createMenuCategory, setMenuCategories } from "@/store/slices/menuCategorySlice";
 import { CreateMenuCategoryPayLoad, MenuCategoryType } from "@/types/menuCategory";
 import { Dialog, DialogTitle, DialogContent, Box, TextField, Button, Switch, FormControlLabel } from "@mui/material";
 import { useState } from "react";
@@ -17,18 +17,9 @@ const CreateMenuCategory = ({openProp,setOpen } : Props) => {
     const [createdMenuCategory, setNewMenuCategory ] = useState<CreateMenuCategoryPayLoad>(defaultNewMenuCategory)
     const dispatch = useAppDispatch();
 
-    const createMenuCategory = async() => {
-       const response = await fetch(`${config.apiBaseUrl}/menu-category`,{
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(createdMenuCategory)
-        })
-       const menuCategories = await response.json();
-      // setMenuCategories(menuCategories);
-        dispatch(setMenuCategories(menuCategories))
-       setNewMenuCategory(defaultNewMenuCategory)
+    const handlerCreateMenuCategory = () => {
+        dispatch(createMenuCategory(createdMenuCategory));
+        setNewMenuCategory(defaultNewMenuCategory);
     };
 
 
@@ -44,7 +35,7 @@ const CreateMenuCategory = ({openProp,setOpen } : Props) => {
                     setNewMenuCategory({...createdMenuCategory,isAvaliable : value})
                 }} />
                 <Button variant="contained" sx={{width: "fit-content"}} onClick={() => {
-                    createMenuCategory();
+                    handlerCreateMenuCategory();
                     setOpen(false);
                 }}>Create</Button>
                 </Box>
