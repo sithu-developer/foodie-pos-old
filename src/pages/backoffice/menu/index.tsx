@@ -5,7 +5,7 @@ import BackofficeLayout from "@/components/layout/Layout";
 import config from "@/config";
 import CreateMenu from "@/components/createMenu/CreateMenu";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { setMenus } from "@/store/slices/menuSlice";
+import { handleReadMenu, setMenus } from "@/store/slices/menuSlice";
 
 
 const MenuPage = () => {
@@ -16,6 +16,7 @@ const MenuPage = () => {
 
     useEffect(() => {
         // fetchMenu();
+        dispatch(handleReadMenu());
      }, []);
 
     return (

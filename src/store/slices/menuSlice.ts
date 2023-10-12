@@ -12,6 +12,11 @@ export const updateMenu = createAsyncThunk("menuSlice/updateMenu", async(payload
     console.log(payload);
 })
 
+export const handleReadMenu = createAsyncThunk("menuSlice/readMenu",async(payload , thunkApi)=> {
+    const response = await fetch(`${config.apiBaseUrl}/menu`);
+    const menus = await response.json();
+    thunkApi.dispatch(setMenus(menus));
+})
 
 export const handleCreateMenu = createAsyncThunk("menuSlice/createMenu1", async(payload : CreateMenuPayLoad , thunkApi) => {
     const response = await fetch(`${config.apiBaseUrl}/menu`,{
